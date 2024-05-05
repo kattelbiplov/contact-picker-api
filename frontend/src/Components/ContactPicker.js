@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+const BASE_URL = process.env.BASE_URL
 const ContactPicker = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState([]);
@@ -23,7 +23,7 @@ const ContactPicker = () => {
       const contacts = await navigator.contacts.select(['name', 'phone']);
       setSelectedContacts(contacts);
       // Send selected contacts to the backend
-      await axios.post('/api/contacts', contacts);
+      await axios.post(`${BASE_URL}/api/contacts`, contacts);
     } catch (error) {
       console.error('Error picking contacts:', error);
     }
